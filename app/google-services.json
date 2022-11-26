@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "491728666831",
+    "project_id": "app-automation-dbe67",
+    "storage_bucket": "app-automation-dbe67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491728666831:android:1c2ee7b699e267cffe77ba",
+        "android_client_info": {
+          "package_name": "com.androiddev.appautomation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491728666831-cir6vok1act0jgdn5tqki9jnmml3t5u0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTqdvd_ngeDQSADU9YuQNS8GJQOabvdgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491728666831-cir6vok1act0jgdn5tqki9jnmml3t5u0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,64 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Create debug build"
+  lane :build_debug do
+    gradle(task: "clean assembleDebug")
+  end
+
+  desc "Increment version code"
+  lane :increment_vc do
+      increment_version_code(
+       gradle_file_path: "./app/build.gradle"
+      )
+  end
+
+   desc "Submit a new Beta Build to Firebase distribution"
+    lane :firebase_distribution do
+      increment_vc
+      build_debug
+
+      notes = changelog_from_git_commits
+      firebase_app_distribution(
+        app: "1:491728666831:android:1c2ee7b699e267cffe77ba",
+              groups: "testers",
+              release_notes: notes
+        )
+
+      versionCode = android_get_version_code
+      versionName = android_get_version_name
+      build = versionName + "." + versionCode
+
+      UI.message "Adding tags for " + build
+
+      git_commit(path: [
+              "app/build.gradle"
+             ],
+             message: "[ci-fastlane] -> build version bump -> v." + build
+          )
+      add_git_tag(
+         tag: "v." + build
+      )
+      push_to_git_remote(
+            remote_branch: "main",
+            set_upstream: true
+      )
+      push_git_tags
+    end
+end
